@@ -1,61 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Feedback Form - ToolNova Next</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       background: #f4f7f6;
       padding: 30px;
       margin: 0;
     }
 
-    h1 {
-      text-align: center;
-      color: #333;
-      font-size: 36px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      margin-bottom: 30px;
-      transition: color 0.3s;
-    }
-
     .form-container {
-      max-width: 800px;
+      max-width: 500px;
       margin: auto;
       background: white;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      transition: box-shadow 0.3s ease;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     }
 
-    .form-container:hover {
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-      color: #555;
-      font-size: 16px;
-    }
-
-    input, select, textarea, button {
+    input, textarea, button {
       width: 100%;
       padding: 12px;
-      margin-top: 8px;
+      margin-top: 10px;
       border: 2px solid #ddd;
       border-radius: 8px;
-      background: #f9f9f9;
       font-size: 16px;
+      background: #f9f9f9;
       transition: all 0.3s;
     }
 
-    input:focus, select:focus, textarea:focus {
+    input:focus, textarea:focus {
       border-color: #3498db;
       background: #fff;
       outline: none;
@@ -66,10 +42,8 @@
       color: white;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 20px;
-      padding: 12px;
+      margin-top: 15px;
       border: none;
-      border-radius: 8px;
       transition: background-color 0.3s ease;
     }
 
@@ -80,113 +54,28 @@
     #success-message {
       display: none;
       color: #2ecc71;
-      font-size: 18px;
-      font-weight: 600;
-      margin-top: 20px;
+      font-size: 16px;
+      margin-top: 15px;
       text-align: center;
-      transition: all 0.5s ease;
-    }
-
-    .footer-message {
-      text-align: center;
-      color: #777;
-      margin-top: 20px;
-      font-size: 14px;
-    }
-
-    .footer-message p {
-      margin: 5px 0;
     }
   </style>
 </head>
 <body>
-
-  <h1>Send Your Important Feedback - ToolNova Next</h1>
 
   <div class="form-container">
     <form id="feedbackForm" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="0734c66f-9369-44db-842f-1206f90b8f85">
       <input type="hidden" name="email_to" value="smripon328@gmail.com">
 
-      <label for="firstName">First Name</label>
-      <input type="text" id="firstName" name="First Name" required />
+      <input type="email" id="email" name="Email" placeholder="Enter your email" required />
+      <textarea id="message" name="Message" rows="5" placeholder="Enter your message" required></textarea>
 
-      <label for="lastName">Last Name</label>
-      <input type="text" id="lastName" name="Last Name" required />
-
-      <label for="gender">Gender</label>
-      <select id="gender" name="Gender" required>
-        <option value="">Select</option>
-        <option>Male</option>
-        <option>Female</option>
-        <option>Other</option>
-      </select>
-
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="Email" required />
-
-      <label for="country">Country</label>
-      <select id="country" name="Country" required>
-        <option value="">Select Country</option>
-        <option>Bangladesh</option>
-        <option>India</option>
-        <option>USA</option>
-        <option>UK</option>
-        <option>Canada</option>
-        <option>Australia</option>
-        <option>Other</option>
-      </select>
-
-      <label for="feedbackType">Select Feedback Type</label>
-      <select id="feedbackType" name="Feedback Type" required onchange="showMessageBox()">
-        <option value="">Select</option>
-        <option value="Bug Report">Bug Report</option>
-        <option value="Feature Request">Feature Request</option>
-        <option value="General Information">General Information</option>
-      </select>
-
-      <div id="messageBoxContainer" style="display:none;">
-        <label for="message">Your Message</label>
-        <textarea id="message" name="Message" rows="5"></textarea>
-      </div>
-
-      <label for="usedFeature">Which feature do you use most?</label>
-      <select id="usedFeature" name="Most Used Feature" required>
-        <option value="">Select</option>
-        <option>AI Tool</option>
-        <option>Utility Tool</option>
-        <option>Text Tool</option>
-        <option>Image Tool</option>
-        <option>Gaming Tool</option>
-      </select>
-
-      <label for="satisfaction">Are you happy using our platform?</label>
-      <select id="satisfaction" name="User Satisfaction" required>
-        <option value="">Select</option>
-        <option>Yes</option>
-        <option>No</option>
-      </select>
-
-      <p style="margin-top: 15px;">Please review all your information before submitting the form.</p>
-
-      <button type="submit">Submit Form</button>
-
+      <button type="submit">Submit</button>
       <div id="success-message"></div>
     </form>
   </div>
 
-  <div class="footer-message">
-    <p>Thank you for using ToolNova Next!</p>
-    <p>We appreciate your feedback and support.</p>
-  </div>
-
   <script>
-    function showMessageBox() {
-      const feedbackType = document.getElementById('feedbackType').value;
-      const messageBox = document.getElementById('messageBoxContainer');
-      messageBox.style.display = feedbackType ? 'block' : 'none';
-    }
-
     const form = document.getElementById('feedbackForm');
     const successMsg = document.getElementById('success-message');
 
@@ -200,10 +89,7 @@
         body: formData
       }).then(response => {
         if (response.ok) {
-          const firstName = document.getElementById('firstName').value;
-          const lastName = document.getElementById('lastName').value;
-          const date = new Date().toLocaleDateString();
-          successMsg.innerHTML = `Dear ${firstName} ${lastName}, you used our platform ToolNova Next on ${date}. On behalf of the Accessible Resource team, we extend our sincere greetings and many thanks for your valuable feedback! Your input helps us improve and serve you better.`;
+          successMsg.innerHTML = "Thank you! Your message has been sent successfully. Your feedback will be reviewed.";
           successMsg.style.display = 'block';
           form.reset();
         } else {
